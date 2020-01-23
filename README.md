@@ -1,2 +1,2 @@
 # unpaid_interns
-CSCE 431 - Software Engineering
+CSCE 431 - SoftwareEngineering
