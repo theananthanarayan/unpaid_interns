@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'haml', '~> 3.1.4'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -33,7 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+#https://github.com/comfy/active_link_to
+gem 'active_link_to'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

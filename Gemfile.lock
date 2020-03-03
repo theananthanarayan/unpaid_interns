@@ -24,6 +24,9 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (5.0.7.2)
       activesupport (= 5.0.7.2)
       globalid (>= 0.3.6)
@@ -38,6 +41,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     arel (7.1.4)
     bindex (0.8.1)
     builder (3.2.4)
@@ -80,7 +85,8 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
-    pg (1.2.2)
+    pg (0.21.0)
+    public_suffix (4.0.3)
     puma (3.12.2)
     rack (2.2.2)
     rack-test (0.6.3)
@@ -158,13 +164,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   byebug
   coffee-rails (~> 4.2)
   haml (~> 3.1.4)
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  pg
+  pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.7, >= 5.0.7.2)
   sass-rails (~> 5.0)
@@ -177,4 +184,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.17.3
+   2.1.2
