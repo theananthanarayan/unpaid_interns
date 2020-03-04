@@ -48,3 +48,18 @@
       %b=link_to "Messages", students_message_url, style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Profile", students_profile_url, style: 'color:#FFFFFF;text-decoration:none;'
 
+    .search.box{:style => "padding-left:50px; padding-top:50px"}    
+      %form
+        =label :student, :first_name, "First Name"
+        =text_field :student, :first_name
+        =label :student, :last_name, "Last Name"
+        =text_field :student, :last_name
+        %br/
+        %br/
+        =label :student, :adviser, "Adviser"
+        =text_field :student, :adviser
+        =label :student, :class_year, "Class Year"
+        =text_field :student, :class_year
+        %br/
+        %br/
+        %input{:type => "submit", :value => "Search"}
