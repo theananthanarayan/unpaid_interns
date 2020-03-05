@@ -20,7 +20,8 @@ column{
     text-align: center;
 }
 
-row{
+row:after{
+    content: "";
     display:table;
     clear:both;
 }
