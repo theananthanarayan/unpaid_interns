@@ -21,7 +21,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'haml', '~> 3.1.4'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'pg', '~> 0.18'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -50,6 +49,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'sqlite3', '~> 1.3.13'
+end
+
+group :production do
+  gem 'pg', '~> 0.21'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
