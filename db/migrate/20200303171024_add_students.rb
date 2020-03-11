@@ -4,8 +4,11 @@ class AddStudents < ActiveRecord::Migration
       t.string :firstName
       t.string :lastName
       t.integer :classYear
-      t.string :Advisor
-      t.text :description
+      t.string :advisor
+      t.text :intro
+      t.string :research, array: true
+      t.string :colleagues, array: true
+      t.string :careers, array: true
       t.string :profilePic
     end
   end

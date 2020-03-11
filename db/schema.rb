@@ -16,8 +16,11 @@ ActiveRecord::Schema.define(version: 20200303171024) do
     t.string  "firstName"
     t.string  "lastName"
     t.integer "classYear"
-    t.string  "Advisor"
-    t.text    "description"
+    t.string  "advisor"
+    t.text    "intro"
+    t.string  "research"
+    t.string  "colleagues"
+    t.string  "careers"
     t.string  "profilePic"
   end
 
