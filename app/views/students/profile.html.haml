@@ -55,7 +55,7 @@
         %h3= @student.firstName + " " + @student.lastName
         %h3= "Class of #{@student.classYear}"
         %img= image_tag @student.profilePic
-        %h3= @student.Advisor
+        %h3= @student.advisor
         %h3= link_to "Send a Message", students_message_url
       %column
         %p= @student.description
