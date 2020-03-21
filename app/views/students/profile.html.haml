@@ -59,3 +59,6 @@
         %h3= link_to "Send a Message", students_message_url
       %column
         %p= @student.intro
+        %h3 Research: #{@student.research}
+        %h3 Colleagues: #{@student.colleagues}
+        %h3 Careers: #{@student.careers}
