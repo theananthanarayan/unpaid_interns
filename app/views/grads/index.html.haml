@@ -51,4 +51,7 @@
       %h2 Top Navigation Example
       %h2= link_to "Go to Profile", students_profile_url
       %p Some content..
+      %h3 Welcome, #{@introMsg}
+      %b= link_to "Login Test", grads_index_url(password: "Octagons888")
+      %b= link_to "Logout Test", grads_index_url(password: "")
 
