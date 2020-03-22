@@ -43,10 +43,10 @@
     .banner{:style => "padding-left:15px; padding-top:10px;"}
       %h{:href => "#index", :style => "color:#500000; font-size: 30px;"} CSE GRAD NETWORKING SITE
     .topnav
-      %b=link_to "Home", grads_index_url, style: 'color:#FFFFFF; text-decoration:none;'
-      %b=link_to "Search", grads_search_url, style: 'color:#FFFFFF;text-decoration:none;'
-      %b=link_to "Messages", students_message_url, style: 'color:#FFFFFF;text-decoration:none;'
-      %b=link_to "Profile", students_profile_url, style: 'color:#FFFFFF;text-decoration:none;'
+      %b=link_to "Home", grads_index_url(password: @pw), style: 'color:#FFFFFF; text-decoration:none;'
+      %b=link_to "Search", grads_search_url(password: @pw), style: 'color:#FFFFFF;text-decoration:none;'
+      %b=link_to "Messages", students_message_url(password: @pw), style: 'color:#FFFFFF;text-decoration:none;'
+      %b=link_to "Profile", students_profile_url(password: @pw), style: 'color:#FFFFFF;text-decoration:none;'
     %div{:style => "padding-left:16px"}
       %h2 Top Navigation Example
       %h2= link_to "Go to Profile", students_profile_url
