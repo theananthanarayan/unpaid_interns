@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
     @student = Student.find(1)
     @studName = @student.firstName + " " + @student.lastName
     
-    if(User.where(password: @pw) == User.where(studentID: @student.id))
+    if(User.where(password: @pw).pluck(:studentID)[0] == @student.id)
       @studName = @studName + " (You)"
     end
   end

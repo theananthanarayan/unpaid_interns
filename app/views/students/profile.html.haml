@@ -48,7 +48,7 @@
       %b=link_to "Messages", students_message_url(password: @pw), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Profile", students_profile_url(password: @pw), style: 'color:#FFFFFF;text-decoration:none;'
     %h2 Profile Test Page
-    %h2= link_to "Go to Home", grads_index_url
+    %h2= link_to "Go to Home", grads_index_url(password: @pw)
 
     %row
       %column
@@ -56,7 +56,7 @@
         %h3= "Class of #{@student.classYear}"
         %img= image_tag @student.profilePic
         %h3= @student.advisor
-        %h3= link_to "Send a Message", students_message_url
+        %h3= link_to "Send a Message", students_message_url(password: @pw)
       %column
         %p= @student.intro
         %h3 Research: #{@student.research}
