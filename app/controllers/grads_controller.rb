@@ -11,7 +11,16 @@ class GradsController < ApplicationController
       @introMsg = "Guest"
     else
       tempUser = User.where(password: @pw, email: @em)
-      @introMsg = Student.find(tempUser.pluck(:studentID)[0]).firstName + " " + Student.find(tempUser.pluck(:studentID)[0]).lastName
+      if tempUser.exists?
+        @introMsg = Student.find(tempUser.pluck(:studentID)[0]).firstName + " " + Student.find(tempUser.pluck(:studentID)[0]).lastName
+      else
+        params[:password] = ""
+        params[:email] = ""
+        @pw = params[:password]
+        @em = params[:email]
+        @introMsg = "Guest"
+        flash[:notice] = "Sorry, Incorrect Login"
+      end
     end
   end
   

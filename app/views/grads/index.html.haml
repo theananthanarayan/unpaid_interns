@@ -58,4 +58,9 @@
         = password_field_tag :password
         %input{:type => "submit", :value => "Sign in"}
       %b= link_to "Logout", grads_index_url(password: "", email: "")
+      = flash.each do |key, value|
+        .alert{ :class => "alert-#{key}" }
+          %button.close{ :data => { :dismiss => "alert" } } x
+          %strong
+            = value
 
