@@ -1,0 +1,39 @@
+---
+- name: You enter your required information
+  uid: 0c6be4ac-b798-47db-b14b-0aae174e20a6
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: You put in the required information
+  uid: c892735a-7b65-4143-a014-1232bf21c1c1
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: You create your account
+  uid: 7d098a45-64c5-4c66-9176-c3dc87f20851
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I am on the home page
+  uid: 86e4e861-2273-4f50-b01b-87747d01bd9e
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I should see a Go to Profile link
+  uid: 8752d16e-c8ba-4061-876c-272fb70baca3
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I click Go To Profile
+  uid: 5a5f110e-eec2-4d06-bc93-b05450fc5aa8
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I should be on the Profile page with the correct "p1"
+  uid: 979d0477-4a6a-457a-b96a-87bd71637da0
+  parameters:
+  - name: p1
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I should see the correct "p1" "p2" "p3" "p4" and "p5"
+  uid: 4aae35fd-004c-4bcc-9855-d3b545f776bc
+  parameters:
+  - name: p1
+  - name: p2
+  - name: p3
+  - name: p4
+  - name: p5
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
