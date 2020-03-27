@@ -51,13 +51,15 @@
       %h2 Top Navigation Example
       %h2= link_to "Go to Profile", students_profile_url
       %h3 Welcome, #{@introMsg}
-      %form
-        = label :email, "Email"
-        = text_field_tag :email
-        = label :user, :password
-        = password_field_tag :password
-        %input{:type => "submit", :value => "Sign in"}
-      %b= link_to "Logout", grads_index_url(password: "", email: "")
+      - if @introMsg == "Guest"
+        %form
+          = label :email, "Email"
+          = text_field_tag :email
+          = label :user, :password
+          = password_field_tag :password
+          %input{:type => "submit", :value => "Sign in"}
+      - else
+        %b= link_to "Logout", grads_index_url(password: "", email: "")
     %div{:style => "padding-left:16px"}
       - flash.each do |key, value|
         .alert
