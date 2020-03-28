@@ -48,19 +48,24 @@
       %b=link_to "Messages", students_message_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Profile", students_profile_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
 
-    %h3 User: #{@introMsg}
+    %h3{:style => "padding-left: 50px; padding-top: 30px"} User: #{@introMsg}
     .search.box{:style => "padding-left:50px; padding-top:50px"}  
       %form
         =label :student, :first_name, "First Name"
         =text_field :student, :first_name
+        %br/
+        %br/
         =label :student, :last_name, "Last Name"
         =text_field :student, :last_name
         %br/
         %br/
-        =label :student, :adviser, "Adviser"
-        =text_field :student, :adviser
+        =label :student, :advisor, "Advisor"
+        =text_field :student, :advisor
+        %br/
+        %br/
         =label :student, :class_year, "Class Year"
-        =text_field :student, :class_year
+        =select :student, :class_year, (Time.zone.now.year - 30)..(Time.zone.now.year + 10)
         %br/
         %br/
         %input{:type => "submit", :value => "Search"}
+        
