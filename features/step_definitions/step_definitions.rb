@@ -30,3 +30,19 @@ end
 Then /^I should see the correct "(.*)" "(.*)" "(.*)" "(.*)" and "(.*)"$/ do |p1, p2, p3, p4, p5|
   i_should_see_the_correct_p1_p2_p3_p4_and_p5(p1, p2, p3, p4, p5)
 end
+
+Then /^I should see a Email and Password field$/ do
+  i_should_see_a_email_and_password_field
+end
+
+When /^I type my email and password$/ do
+  i_type_my_email_and_password
+end
+
+When /^click the sign in button$/ do
+  click_the_sign_in_button
+end
+
+Then /^I should be signed in$/ do
+  i_should_be_signed_in
+end

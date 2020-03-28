@@ -37,3 +37,23 @@
   - name: p4
   - name: p5
   body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I'm on the home page
+  uid: 5d6d5620-b9fd-4c83-be16-c2a13dd35ac2
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I should see a Email and Password field
+  uid: 1d5be035-e459-49cf-9389-354cf701d761
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I type my email and password
+  uid: f842b8db-1e2a-4847-b4c9-615cf17dc9b0
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: click the sign in button
+  uid: c690c327-58fd-44ea-b3bd-a9955c347c20
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
+- name: I should be signed in
+  uid: 4013f630-4771-4345-97b2-07f1508aaab1
+  parameters: []
+  body_hash: d41d8cd98f00b204e9800998ecf8427e
