@@ -64,7 +64,7 @@
         %br/
         %br/
         =label :student, :class_year, "Class Year"
-        =select :student, :class_year, (Time.zone.now.year - 30)..(Time.zone.now.year + 10)
+        =select :student, :class_year, ((Time.zone.now.year - 30)..(Time.zone.now.year + 10)).to_a.map(&:to_s), { include_blank: '' }
         %br/
         %br/
         %input{:type => "submit", :value => "Search"}
