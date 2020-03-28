@@ -4,6 +4,48 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     :css
+      .center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      .collapsible {
+        background-color: #777;
+        color: white;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 12px;
+      }
+      
+      .active, .collapsible:hover {
+        background-color: #555;
+      }
+      
+      .collapsible:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+      }
+      
+      .active:after {
+        content: "\2212";
+      }
+
+      .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #f1f1f1;
+      }
+
       body {
         margin: 0;
         font-family: Geneva;
@@ -39,6 +81,7 @@
         background-color: #8a0000;
         color: white;
       }
+
   %body
     .banner{:style => "padding-left:15px; padding-top:10px;"}
       %h{:href => "#index", :style => "color:#500000; font-size: 30px;"} CSE GRAD NETWORKING SITE
@@ -47,22 +90,46 @@
       %b=link_to "Search", grads_search_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Profile", students_profile_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
-    %div{:style => "padding-left:16px"}
-      %h2 Top Navigation Example
-      %h2= link_to "Go to Profile", students_profile_url
-      %h3 Welcome, #{@introMsg}
+    %div{:style => "padding-left:0px"}
       - if @introMsg == "Guest"
-        %form
-          = label :email, "Email"
-          = text_field_tag :email
-          = label :user, :password
-          = password_field_tag :password
-          %input{:type => "submit", :value => "Sign in"}
+        %button.collapsible Welcome, Guest. Would you like to login?
+        .content
+          %br/
+          %form
+            = label :email, "Email"
+            = text_field_tag :email
+            = label :user, :password
+            = password_field_tag :password
+            %input{:type => "submit", :value => "Sign in"}
+          %br/
+          %div{:style => "padding-left:16px"}
+            - flash.each do |key, value|
+              .alert
+                %strong
+                  = value
       - else
         %b= link_to "Logout", grads_index_url(password: "", email: "")
-    %div{:style => "padding-left:16px"}
-      - flash.each do |key, value|
-        .alert
-          %strong
-            = value
+      
+      %h2= link_to "Go to Profile", students_profile_url
+      %h3 Welcome, #{@introMsg}
+      %img{:alt => "cs landing", :src => "https://engineering.tamu.edu/cse/_files/_images/_content-images/tapia_2016.jpg", :class => "center"}/
 
+    %div{:style => "text-align:center;padding:30px;"}
+      %h4 Students, faculty, and staff in CSE are continuing to work together to build an even stronger department. 
+      %h4 The mission of the Department of Computer Science is to develop the human and intellectual resources needed to meet the future technological challenges in the field of computing. This includes developing computer scientists and computer engineers for positions of leadership in industry, government, and academia.
+      
+    :javascript
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+      
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          } 
+        });
+      }
