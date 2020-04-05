@@ -12,18 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20200321205341) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "students", force: :cascade do |t|
     t.string  "firstName"
     t.string  "lastName"
     t.integer "classYear"
     t.string  "advisor"
     t.text    "intro"
-    t.string  "research",   array: true
-    t.string  "colleagues", array: true
-    t.string  "careers",    array: true
+    t.string  "research"
+    t.string  "colleagues"
+    t.string  "careers"
     t.string  "profilePic"
   end
 

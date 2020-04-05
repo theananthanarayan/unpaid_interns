@@ -102,6 +102,8 @@
             = password_field_tag :password
             %input{:type => "submit", :value => "Sign in"}
           %br/
+          = link_to "Or Sign Up", grads_new_url
+          %br/
           %div{:style => "padding-left:16px"}
             - flash.each do |key, value|
               .alert

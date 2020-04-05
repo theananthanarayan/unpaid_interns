@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'grads/index'
 
   get 'grads/search'
+  
+  get 'grads/new'
 
   resources :students
   
