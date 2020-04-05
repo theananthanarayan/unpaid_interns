@@ -10,6 +10,8 @@ class AddStudents < ActiveRecord::Migration[5.0]
       t.string :colleagues, array: true
       t.string :careers, array: true
       t.string :profilePic
+      t.string :password
+      t.string :email
     end
   end
   

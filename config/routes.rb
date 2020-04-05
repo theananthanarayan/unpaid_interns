@@ -3,15 +3,11 @@ Rails.application.routes.draw do
   
   get 'students/profile'
 
-  get 'grads/index'
+  get 'students/index'
 
-  get 'grads/search'
+  get 'students/search'
   
-  get 'grads/new'
-
   resources :students
-  
-  resources :users
 
-  root 'grads#index'
+  root 'students#index'
 end

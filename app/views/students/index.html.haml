@@ -86,8 +86,8 @@
     .banner{:style => "padding-left:15px; padding-top:10px;"}
       %h{:href => "#index", :style => "color:#500000; font-size: 30px;"} CSE GRAD NETWORKING SITE
     .topnav
-      %b=link_to "Home", grads_index_url(password: @pw, email: @em), style: 'color:#FFFFFF; text-decoration:none;'
-      %b=link_to "Search", grads_search_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
+      %b=link_to "Home", students_index_url(password: @pw, email: @em), style: 'color:#FFFFFF; text-decoration:none;'
+      %b=link_to "Search", students_search_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Profile", students_profile_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
     %div{:style => "padding-left:0px"}
@@ -102,7 +102,7 @@
             = password_field_tag :password
             %input{:type => "submit", :value => "Sign in"}
           %br/
-          = link_to "Or Sign Up", grads_new_url
+          /= link_to "Or Sign Up", new_user_path
           %br/
           %div{:style => "padding-left:16px"}
             - flash.each do |key, value|
@@ -110,7 +110,7 @@
                 %strong
                   = value
       - else
-        %b= link_to "Logout", grads_index_url(password: "", email: "")
+        %b= link_to "Logout", students_index_url(password: "", email: "")
       
       %h2= link_to "Go to Profile", students_profile_url
       %h3 Welcome, #{@introMsg}

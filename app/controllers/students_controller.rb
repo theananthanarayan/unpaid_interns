@@ -1,11 +1,57 @@
 class StudentsController < ApplicationController
+  def index
+    @pw = params[:password]
+    @em = params[:email]
+    flash[:notice] = ""
+    if @pw == nil || @pw == "" || @em == nil || @em == ""
+      defaultInfo
+    else
+      tempStudent = Student.where(password: @pw, email: @em)
+      if tempStudent.exists?
+        @introMsg = tempStudent.pluck(:firstName)[0] + " " + tempStudent.pluck(:lastName)[0]
+      else
+        defaultInfo
+        flash[:notice] = "Sorry, Incorrect Login"
+      end
+    end
+  end
+  
+  def search
+    @pw = params[:password]
+    @em = params[:email]
+    if @pw == nil || @pw == "" || @em == nil || @em == ""
+      defaultInfo
+    else
+      tempStudent = Student.where(password: @pw, email: @em)
+      @introMsg = tempStudent.pluck(:firstName)[0] + " " + tempStudent.pluck(:lastName)[0]
+    end
+  end
+  
+  def defaultInfo
+    params[:password] = ""
+    params[:email] = ""
+    @pw = params[:password]
+    @em = params[:email]
+    @introMsg = "Guest"
+  end
+  
+  def new
+  end
+  
+  def create
+    @student = Student.create!([{firstName: params[:firstName], lastName: params[:lastName], classYear: 0000, advisor: "", intro: "", research: [], colleagues: [], careers: [], profilePic: ""}])
+    @user = User.create!([{studentID: @student.id, password: params[:password], email: params[:email]}])
+    flash[:notice] = "New User Created.  Now log in."
+    redirect_to grads_index_url
+  end
+  
   def profile
     @pw = params[:password]
     @em = params[:email]
     @student = Student.find(1)
     @studName = @student.firstName + " " + @student.lastName
     
-    if(User.where(password: @pw, email: @em).pluck(:studentID)[0] == @student.id)
+    if(Student.where(password: @pw, email: @em) == @student)
       @studName = @studName + " (You)"
     end
   end
@@ -14,9 +60,6 @@ class StudentsController < ApplicationController
     @pw = params[:password]
     @em = params[:email]
   end 
-
-
-
   
   def searchBox
     @fn = params[:first_name]
@@ -57,7 +100,4 @@ class StudentsController < ApplicationController
       @result = Student.where(firstName: @fn, lastName: @ln, advisor: @adv, classYear: @clsyr).select("field1, field2, field3, field4")
     end 
   end
-  
-
-
 end
