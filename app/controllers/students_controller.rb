@@ -39,10 +39,10 @@ class StudentsController < ApplicationController
   end
   
   def create
-    @student = Student.create!([{firstName: params[:firstName], lastName: params[:lastName], classYear: 0000, advisor: "", intro: "", research: [], colleagues: [], careers: [], profilePic: ""}])
-    @user = User.create!([{studentID: @student.id, password: params[:password], email: params[:email]}])
+    @p = params[:student]
+    @student = Student.create!([{firstName: @p[:firstName], lastName: @p[:lastName], classYear: 0000, advisor: "", intro: "", research: [], colleagues: [], careers: [], profilePic: "", password: @p[:password], email: @p[:email]}])
     flash[:notice] = "New User Created.  Now log in."
-    redirect_to grads_index_url
+    redirect_to students_index_url
   end
   
   def profile

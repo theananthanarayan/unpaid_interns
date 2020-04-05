@@ -98,11 +98,11 @@
           %form
             = label :email, "Email"
             = text_field_tag :email
-            = label :user, :password
+            = label :student, :password
             = password_field_tag :password
             %input{:type => "submit", :value => "Sign in"}
           %br/
-          /= link_to "Or Sign Up", new_user_path
+          = link_to "Or Sign Up", new_student_path
           %br/
           %div{:style => "padding-left:16px"}
             - flash.each do |key, value|

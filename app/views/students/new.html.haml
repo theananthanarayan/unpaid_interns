@@ -93,7 +93,7 @@
       
 %h2 Sign Up
 
-= form_tag grads_index_url do
+= form_tag students_path do
 
   = label :student, :firstName, 'First Name'
   = text_field :student, 'firstName'
@@ -101,10 +101,10 @@
   = label :student, :lastName, 'Last Name'
   = text_field :student, 'lastName'
   
-  = label :user, :email, 'Email'
-  = text_field :user, 'email'
+  = label :student, :email, 'Email'
+  = text_field :student, 'email'
   
-  = label :user, :password
-  = text_field :user, "password"
+  = label :student, :password
+  = text_field :student, "password"
 
   = submit_tag 'Save User', :class => 'btn btn-primary'
