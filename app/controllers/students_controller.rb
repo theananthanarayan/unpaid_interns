@@ -48,12 +48,17 @@ class StudentsController < ApplicationController
   def profile
     @pw = params[:password]
     @em = params[:email]
-    @student = Student.find(1)
-    @studName = @student.firstName + " " + @student.lastName
+    @student = Student.where(password: @pw, email: @em)
     
-    if(Student.where(password: @pw, email: @em) == @student)
-      @studName = @studName + " (You)"
-    end
+    @studName = @student.pluck(:firstName)[0] + " " + @student.pluck(:lastName)[0]
+    @studYear = @student.pluck(:classYear)[0]
+    @studPic = @student.pluck(:profilePic)[0]
+    @studAd = @student.pluck(:advisor)[0]
+    @studInt = @student.pluck(:intro)[0]
+    @studRes = @student.pluck(:research)[0]
+    @studCol = @student.pluck(:colleagues)[0]
+    @studCar = @student.pluck(:careers)[0]
+     
   end
   
   def message

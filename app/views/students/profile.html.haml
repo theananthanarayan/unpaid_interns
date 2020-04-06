@@ -94,13 +94,13 @@
 
     %row
       %column
-        %h3= @studName
-        %h3= "Class of #{@student.classYear}"
-        %img= image_tag @student.profilePic
-        %h3= @student.advisor
-        %h3= link_to "Send a Message", students_message_url(password: @pw)
+        %h3 #{@studName}
+        %h3= "Class of #{@studYear}"
+        %img= image_tag @studPic
+        %h3= @studAd
+        %h3= link_to "Send a Message", students_message_url(password: @pw, email: @em)
       %column
-        %p= @student.intro
-        %h3 Research: #{@student.research}
-        %h3 Colleagues: #{@student.colleagues}
-        %h3 Careers: #{@student.careers}
+        %p= @studInt
+        %h3 Research: #{@studRes}
+        %h3 Colleagues: #{@studCol}
+        %h3 Careers: #{@studCar}
