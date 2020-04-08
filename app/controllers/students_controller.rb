@@ -22,8 +22,10 @@ class StudentsController < ApplicationController
     if @pw == nil || @pw == "" || @em == nil || @em == ""
       defaultInfo
     else
-      tempStudent = Student.where(password: @pw, email: @em)
-      @introMsg = tempStudent.pluck(:firstName)[0] + " " + tempStudent.pluck(:lastName)[0]
+      @tempStudent = Student.where(password: @pw, email: @em)
+      @tempStudent = @tempStudent.take()
+      
+      @introMsg = tempStudent.firstName + " " + tempStudent.lastName
     end
   end
   
@@ -49,17 +51,7 @@ class StudentsController < ApplicationController
     @pw = params[:password]
     @em = params[:email]
     @student = Student.where(password: @pw, email: @em)
-    
-    @studName = @student.pluck(:firstName)[0] + " " + @student.pluck(:lastName)[0]
-    @studYear = @student.pluck(:classYear)[0]
-    @studPic = @student.pluck(:profilePic)[0]
-    @studAd = @student.pluck(:advisor)[0]
-    @studInt = @student.pluck(:intro)[0]
-    @studRes = @student.pluck(:research)[0]
-    @studCol = @student.pluck(:colleagues)[0]
-    @studCar = @student.pluck(:careers)[0]
-    
-    @studID = @student.pluck(:id)[0]
+    @student = @student.take()
      
   end
 
