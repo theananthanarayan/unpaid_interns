@@ -1,0 +1,13 @@
+-# edit.html.haml using partial
+
+%h2 Change Your Profile
+
+= form_tag students_path(@student), :method => :put do
+
+  = label :student, :firstName, 'First Name'
+  = text_field :student, 'firstName'
+  
+  = label :student, :lastName, 'Last Name'
+  = text_field :student, 'lastName'
+
+  = submit_tag 'Update Movie Info', :class => 'btn btn-primary'

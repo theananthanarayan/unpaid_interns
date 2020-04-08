@@ -58,7 +58,22 @@ class StudentsController < ApplicationController
     @studRes = @student.pluck(:research)[0]
     @studCol = @student.pluck(:colleagues)[0]
     @studCar = @student.pluck(:careers)[0]
+    
+    @studID = @student.pluck(:id)[0]
      
+  end
+
+  def edit
+    @student = Student.where(password: @pw, email: @em)
+    @student = @student.take()
+  end
+  
+  def update
+    @pw = params[:password]
+    @em = params[:email]
+    @student = Student.where(password: @pw, email: @em)
+    @student.update_attributes!(student_params)
+    redirect_to student_profile_url(password: @pw, email: @em)
   end
   
   def message

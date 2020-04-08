@@ -99,6 +99,8 @@
         %img= image_tag @studPic
         %h3= @studAd
         %h3= link_to "Send a Message", students_message_url(password: @pw, email: @em)
+        %h3= link_to "Edit Your Profile", edit_student_path(@student)
+        
       %column
         %p= @studInt
         %h3 Research: #{@studRes}
