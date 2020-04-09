@@ -34,15 +34,15 @@ class StudentsController < ApplicationController
   end
   
   def search
-    @pw = params[:password]
-    @em = params[:email]
+    @pw = session[:password]
+    @em = session[:email]
     if @pw == nil || @pw == "" || @em == nil || @em == ""
       defaultInfo
     else
       @tempStudent = Student.where(password: @pw, email: @em)
       @tempStudent = @tempStudent.take()
       
-      @introMsg = tempStudent.firstName + " " + tempStudent.lastName
+      @introMsg = @tempStudent.firstName + " " + @tempStudent.lastName
     end
   end
   
@@ -65,8 +65,8 @@ class StudentsController < ApplicationController
   end
   
   def profile
-    @pw = params[:password]
-    @em = params[:email]
+    @pw = session[:password]
+    @em = session[:email]
     @student = Student.where(password: @pw, email: @em)
     @student = @student.take()
      
@@ -84,8 +84,8 @@ class StudentsController < ApplicationController
   end
   
   def message
-    @pw = params[:password]
-    @em = params[:email]
+    @pw = session[:password]
+    @em = session[:email]
   end 
   
   def searchBox
