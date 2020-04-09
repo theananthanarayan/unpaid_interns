@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  
   def index
     @pw = params[:password]
     @em = params[:email]
