@@ -1,8 +1,13 @@
 class StudentsController < ApplicationController
   
+  def setSession(session)
+    session[:password] = ""
+    session[:email] = ""
+  end
+  
   def index
-    @pw = params[:password]
-    @em = params[:email]
+    @pw = session[:password]
+    @em = session[:email]
     flash[:notice] = ""
     if @pw == nil || @pw == "" || @em == nil || @em == ""
       defaultInfo
@@ -15,6 +20,17 @@ class StudentsController < ApplicationController
         flash[:notice] = "Sorry, Incorrect Login"
       end
     end
+  end
+  
+  def login
+    session[:password] = params[:password]
+    session[:email] = params[:email]
+    redirect_to students_index_url
+  end
+  
+  def logout
+    defaultInfo
+    redirect_to students_index_url
   end
   
   def search
@@ -31,10 +47,10 @@ class StudentsController < ApplicationController
   end
   
   def defaultInfo
-    params[:password] = ""
-    params[:email] = ""
-    @pw = params[:password]
-    @em = params[:email]
+    session[:password] = ""
+    session[:email] = ""
+    @pw = session[:password]
+    @em = session[:email]
     @introMsg = "Guest"
   end
   

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   get 'students/search'
   
+  get 'students/login'
+  
+  get 'students/logout'
+  
   resources :students
 
   root 'students#index'
