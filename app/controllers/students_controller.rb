@@ -56,16 +56,14 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    @student = Student.where(password: @pw, email: @em)
-    @student = @student.take()
+    @student = Student.find(params[:id])
   end
   
   def update
-    @pw = params[:password]
-    @em = params[:email]
-    @student = Student.where(password: @pw, email: @em)
-    @student.update_attributes!(student_params)
-    redirect_to student_profile_url(password: @pw, email: @em)
+    @p = params[:student]
+    @student = Student.find(params[:id])
+    @student.update_attributes!({firstName: @p[:firstName], lastName: @p[:lastName]})
+    redirect_to students_profile_url(password: @student.password, email: @student.email)
   end
   
   def message
