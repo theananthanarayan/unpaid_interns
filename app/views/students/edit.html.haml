@@ -1,4 +1,92 @@
--# edit.html.haml using partial
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      .center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      .collapsible {
+        background-color: #777;
+        color: white;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 12px;
+      }
+      
+      .active, .collapsible:hover {
+        background-color: #555;
+      }
+      
+      .collapsible:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+      }
+      
+      .active:after {
+        content: "\2212";
+      }
+
+      .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #f1f1f1;
+      }
+
+      body {
+        margin: 0;
+        font-family: Geneva;
+      }
+      
+      .banner {
+        overflow: hidden;
+        background-color: #500000;
+        height: 50px;
+      }
+      
+      .topnav {
+        overflow: hidden;
+        background-color: #500000;
+      }
+      
+      .topnav b {
+        float: left;
+        width: 23.25%;
+        color: #500000;
+        text-align: center;
+        padding: 10px 12px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      
+      .topnav b:hover {
+        background-color: #8a0000;
+        color: white;
+      }
+      
+      .topnav b.active {
+        background-color: #8a0000;
+        color: white;
+      }
+
+  %body
+    .banner{:style => "padding-left:15px; padding-top:10px;"}
+      %h{:href => "#index", :style => "color:#FFFFFF; font-size: 30px;"} CSE GRAD NETWORKING SITE
+    .topnav
+
 %h2 Change Your Profile
 
 = form_tag student_path(@student), :method => :put do
@@ -8,5 +96,23 @@
   
   = label :student, :lastName, 'Last Name'
   = text_field :student, 'lastName'
+  
+  %br/
+  %br/
+  
+  = label :student, :classYear, "Class Year"
+  = select :student, :classYear, ((Time.zone.now.year - 30)..(Time.zone.now.year + 10)).to_a.map(&:to_s)
 
+  = label :student, :advisor, 'Advisor'
+  = text_field :student, 'advisor'
+  
+  %br/
+  %br/
+  
+  = label :student, :intro, 'Student Introduction'
+  = text_area :student, 'intro', :rows => 10, :columns => 80
+  
+  %br/
+  %br/
+  
   = submit_tag 'Update Your Info', :class => 'btn btn-primary'

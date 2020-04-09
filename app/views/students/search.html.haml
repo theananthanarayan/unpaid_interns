@@ -89,7 +89,8 @@
       %b=link_to "Home", students_index_url(password: @pw, email: @em), style: 'color:#FFFFFF; text-decoration:none;'
       %b=link_to "Search", students_search_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
-      %b=link_to "Profile", students_profile_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
+      - if @introMsg != "Guest"
+        %b=link_to "Profile", students_profile_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
 
     %h3{:style => "padding-left: 50px; padding-top: 30px"} User: #{@introMsg}
     .search.box{:style => "padding-left:50px; padding-top:50px"}  

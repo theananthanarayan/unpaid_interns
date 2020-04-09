@@ -62,7 +62,7 @@ class StudentsController < ApplicationController
   def update
     @p = params[:student]
     @student = Student.find(params[:id])
-    @student.update_attributes!({firstName: @p[:firstName], lastName: @p[:lastName]})
+    @student.update_attributes!({firstName: @p[:firstName], lastName: @p[:lastName], classYear: @p[:classYear], advisor: @p[:advisor], intro: @p[:intro]})
     redirect_to students_profile_url(password: @student.password, email: @student.email)
   end
   

@@ -89,7 +89,8 @@
       %b=link_to "Home", students_index_url(password: @pw, email: @em), style: 'color:#FFFFFF; text-decoration:none;'
       %b=link_to "Search", students_search_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
-      %b=link_to "Profile", students_profile_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
+      - if @pw != ""
+        %b=link_to "Profile", students_profile_url(password: @pw, email: @em), style: 'color:#FFFFFF;text-decoration:none;'
     %div{:style => "padding-left:16px;"}
       %h2 Messages coming soon!
       %h2= link_to "Go to Home", students_index_url
