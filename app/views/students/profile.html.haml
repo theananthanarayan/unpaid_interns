@@ -106,6 +106,5 @@
         
       %column
         %p= @student.intro
-        %h3 Research: #{@student.research}
-        %h3 Colleagues: #{@student.colleagues}
-        %h3 Careers: #{@student.careers}
+        - @display.each do |field|
+          %h3 #{field}: #{@student.send(field)}

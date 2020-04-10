@@ -86,6 +86,7 @@ class StudentsController < ApplicationController
     if session.has_key?(:id)
       @hasOwnership = @student.id==session[:id]
     end
+    @display = [:research,:advisor, :colleagues,:careers]
   end
 
   def edit
