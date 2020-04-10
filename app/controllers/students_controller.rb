@@ -41,14 +41,13 @@ class StudentsController < ApplicationController
     unless params[:student].nil?
       studentHash = params[:student]
     end
-
+  
     @attributes.each do |attribute|
       if studentHash[attribute.to_s]!= ''
-        query[attribute]=studentHash["firstName"]
+        query[attribute]=studentHash[attribute]
       end
     end
-    
-    @result = Student.where(query).select(@attributes)
+    @result = Student.where(query).select(@attributes,:id)
   end
   
   def defaultInfo
