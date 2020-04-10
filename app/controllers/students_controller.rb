@@ -12,9 +12,10 @@ class StudentsController < ApplicationController
     if @pw == nil || @pw == "" || @em == nil || @em == ""
       defaultInfo
     else
-      tempStudent = Student.where(password: @pw, email: @em)
-      if tempStudent.exists?
-        @introMsg = tempStudent.pluck(:firstName)[0] + " " + tempStudent.pluck(:lastName)[0]
+      @tempStudent = Student.where(password: @pw, email: @em)
+      if @tempStudent.exists?
+        @introMsg = @tempStudent.pluck(:firstName)[0] + " " + @tempStudent.pluck(:lastName)[0]
+        @ID = @tempStudent.pluck(:id)[0]
       else
         defaultInfo
         flash[:notice] = "Sorry, Incorrect Login"
@@ -67,8 +68,10 @@ class StudentsController < ApplicationController
   def profile
     @pw = session[:password]
     @em = session[:email]
-    @student = Student.where(password: @pw, email: @em)
-    @student = @student.take()
+    @userStudent = Student.where(password: @pw, email: @em)
+    @userStudent = @userStudent.take()
+    @id = params[:id]
+    @student = Student.find(@id)
      
   end
 
@@ -80,15 +83,22 @@ class StudentsController < ApplicationController
     @p = params[:student]
     @student = Student.find(params[:id])
     @student.update_attributes!({firstName: @p[:firstName], lastName: @p[:lastName], classYear: @p[:classYear], advisor: @p[:advisor], intro: @p[:intro]})
-    redirect_to students_profile_url(password: @student.password, email: @student.email)
+    redirect_to students_profile_url(id: @student.id)
   end
   
   def message
     @pw = session[:password]
     @em = session[:email]
+    @tempStudent = Student.where(password: @pw, email: @em)
+    @tempStudent = @tempStudent.take()
   end 
   
   def searchBox
+    @pw = session[:password]
+    @em = session[:email]
+    @tempStudent = Student.where(password: @pw, email: @em)
+    @tempStudent = @tempStudent.take()
+    
     @fn = params[:first_name]
     @ln = params[:last_name]
     @adv = params[:advisor]

@@ -90,7 +90,7 @@
       %b=link_to "Search", students_search_url, style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url, style: 'color:#FFFFFF;text-decoration:none;'
       - if @introMsg != "Guest"
-        %b=link_to "Profile", students_profile_url, style: 'color:#FFFFFF;text-decoration:none;'
+        %b=link_to "Profile", students_profile_url(id: @ID), style: 'color:#FFFFFF;text-decoration:none;'
 
     %div{:style => "padding-left:0px"}
       - if @introMsg == "Guest"
