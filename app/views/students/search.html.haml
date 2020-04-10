@@ -120,7 +120,12 @@
           %th Last Name
           %th Advisor
           %th Class Year
+          %th Profile
       %tbody
         - @result.each do |student|
           %tr
             %td= student.firstName
+            %td= student.lastName
+            %td= student.advisor
+            %td= student.classYear
+            %td= link_to 'visit', :action => "profile", :id=>student.id
