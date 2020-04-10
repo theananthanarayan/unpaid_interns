@@ -106,4 +106,4 @@
       %column
         %p= @student.intro
         - @display.each do |field|
-          %h3 #{field}: #{@student.send(field)}
+          %h3 #{field.capitalize}: #{@student.send(field)}

@@ -50,7 +50,7 @@ class StudentsController < ApplicationController
   
     @attributes.each do |attribute|
       if studentHash[attribute.to_s]!= ''
-        query[attribute]=studentHash[attribute]
+        query[attribute]=studentHash[attribute].downcase.capitalize
       end
     end
     @result = Student.where(query).select(@attributes,:id)
