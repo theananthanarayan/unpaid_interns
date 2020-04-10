@@ -95,21 +95,23 @@
     %h3{:style => "padding-left: 50px; padding-top: 30px"} User: #{@introMsg}
     .search.box{:style => "padding-left:50px; padding-top:50px"}  
       %form
-        =label :student, :first_name, "First Name"
-        =text_field :student, :first_name
+        =label :student, :firstName, "First Name"
+        =text_field :student, :firstName
         %br/
         %br/
-        =label :student, :last_name, "Last Name"
-        =text_field :student, :last_name
+        =label :student, :lastName, "Last Name"
+        =text_field :student, :lastName
         %br/
         %br/
         =label :student, :advisor, "Advisor"
         =text_field :student, :advisor
         %br/
         %br/
-        =label :student, :class_year, "Class Year"
-        =select :student, :class_year, ((Time.zone.now.year - 30)..(Time.zone.now.year + 10)).to_a.map(&:to_s), { include_blank: '' }
+        =label :student, :classYear, "Class Year"
+        =select :student, :classYear, ((Time.zone.now.year - 30)..(Time.zone.now.year + 10)).to_a.map(&:to_s), { include_blank: '' }
         %br/
         %br/
         %input{:type => "submit", :value => "Search"}
+        
+        
         
