@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
     end
   
     @attributes.each do |attribute|
-      if studentHash[attribute.to_s]!= ''
+      if studentHash[attribute.to_s]!= '' && studentHash[attribute.to_s]!=nil
         query[attribute]=studentHash[attribute].downcase.capitalize
       end
     end
