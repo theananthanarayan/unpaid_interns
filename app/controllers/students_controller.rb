@@ -34,9 +34,14 @@ class StudentsController < ApplicationController
   end
   
   def search
-    studentHash = params[:student]
     @attributes = [:firstName, :lastName, :advisor, :classYear] 
+    studentHash = {}
     query = {}
+    
+    unless params[:student].nil?
+      studentHash = params[:student]
+    end
+
     @attributes.each do |attribute|
       if studentHash[attribute.to_s]!= ''
         query[attribute]=studentHash["firstName"]
