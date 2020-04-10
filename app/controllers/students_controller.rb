@@ -26,6 +26,11 @@ class StudentsController < ApplicationController
   def login
     session[:password] = params[:password]
     session[:email] = params[:email]
+    pw = session[:password]
+    em = session[:email]
+    user = Student.where(password: pw, email: em).select(:id)
+    user = user.take()
+    session[:id]=user.id
     redirect_to students_index_url
   end
   
@@ -35,16 +40,20 @@ class StudentsController < ApplicationController
   end
   
   def search
-    @pw = session[:password]
-    @em = session[:email]
-    if @pw == nil || @pw == "" || @em == nil || @em == ""
-      defaultInfo
-    else
-      @tempStudent = Student.where(password: @pw, email: @em)
-      @tempStudent = @tempStudent.take()
-      
-      @introMsg = @tempStudent.firstName + " " + @tempStudent.lastName
+    @attributes = [:firstName, :lastName, :advisor, :classYear] 
+    studentHash = {}
+    query = {}
+    
+    unless params[:student].nil?
+      studentHash = params[:student]
     end
+  
+    @attributes.each do |attribute|
+      if studentHash[attribute.to_s]!= ''
+        query[attribute]=studentHash[attribute]
+      end
+    end
+    @result = Student.where(query).select(@attributes,:id)
   end
   
   def defaultInfo
@@ -66,13 +75,17 @@ class StudentsController < ApplicationController
   end
   
   def profile
-    @pw = session[:password]
-    @em = session[:email]
-    @userStudent = Student.where(password: @pw, email: @em)
-    @userStudent = @userStudent.take()
-    @id = params[:id]
-    @student = Student.find(@id)
-     
+    if params.has_key?(:id)
+      @student = Student.find(params[:id])
+    elsif session.has_key?(:id)
+      @student = Student.find(session[:id])
+    else 
+      @student = Student.find(1)    #temp invalid student handling 
+    end
+    @hasOwnership = false
+    if session.has_key?(:id)
+      @hasOwnership = @student.id==session[:id]
+    end
   end
 
   def edit
@@ -92,49 +105,4 @@ class StudentsController < ApplicationController
     @tempStudent = Student.where(password: @pw, email: @em)
     @tempStudent = @tempStudent.take()
   end 
-  
-  def searchBox
-    @pw = session[:password]
-    @em = session[:email]
-    @tempStudent = Student.where(password: @pw, email: @em)
-    @tempStudent = @tempStudent.take()
-    
-    @fn = params[:first_name]
-    @ln = params[:last_name]
-    @adv = params[:advisor]
-    @clsyr = params[:class_year]
-    if @fn == nil || @fn == ""
-      @result = Student.where(lastName: @ln, advisor: @adv, classYear: @clsyr).select("field1, field2, field3, field4")
-    elsif @ln == nil|| @ln == ""
-      @result = Student.where(firstName: @fn, advisor: @adv, classYear: @clsyr).select("field1, field2, field3, field4")
-    elsif @adv == nil || @adv == ""
-      @result = Student.where(firstName: @fn, lastName: @ln, classYear: @clsyr).select("field1, field2, field3, field4")
-    elsif @clsyr == nil || @clsyr == ""
-      @result = Student.where(firstName: @fn, lastName: @ln, advisor: @adv).select("field1, field2, field3, field4")
-    elsif @fn == nil || @fn == "" && @ln == nil|| @ln == ""
-      @result = Student.where(advisor: @adv, classYear: @clsyr).select("field1, field2, field3, field4")
-    elsif @fn == nil || @fn == "" && @adv == nil || @adv == ""
-      @result = Student.where(lastName: @ln, classYear: @clsyr).select("field1, field2, field3, field4")
-    elsif @fn == nil || @fn == "" && @clsyr == nil || @clsyr == ""
-      @result = Student.where(lastName: @ln, advisor: @adv).select("field1, field2, field3, field4")
-    elsif @ln == nil|| @ln == "" && @adv == nil || @adv == ""
-      @result = Student.where(firstName: @fn, classYear: @clsyr).select("field1, field2, field3, field4")
-    elsif @ln == nil|| @ln == "" && @clsyr == nil || @clsyr == ""
-      @result = Student.where(firstName: @fn, advisor: @adv).select("field1, field2, field3, field4")
-    elsif @adv == nil || @adv == "" && @clsyr == nil || @clsyr == ""
-      @result = Student.where(firstName: @fn, lastName: @ln).select("field1, field2, field3, field4")
-    elsif @fn == nil || @fn == "" && @ln == nil|| @ln == "" && @adv == nil || @adv == ""
-      @result = Student.where(classYear: @clsyr).select("field1, field2, field3, field4")
-    elsif @fn == nil || @fn == "" && @ln == nil|| @ln == "" && @clsyr == nil || @clsyr == ""
-      @result = Student.where(advisor: @adv).select("field1, field2, field3, field4")
-    elsif @ln == nil|| @ln == "" && @adv == nil || @adv == "" && @clsyr == nil || @clsyr == ""
-      @result = Student.where(firstName: @fn).select("field1, field2, field3, field4")
-    elsif @fn == nil || @fn == "" && @adv == nil || @adv == "" && @clsyr == nil || @clsyr == ""
-      @result = Student.where(lastName: @ln).select("field1, field2, field3, field4")
-    elsif @fn == nil || @fn == "" && @ln == nil|| @ln == "" && @adv == nil || @adv == "" && @clsyr == nil || @clsyr == ""
-      flash[:notice] = "Please fill out the form"
-    else 
-      @result = Student.where(firstName: @fn, lastName: @ln, advisor: @adv, classYear: @clsyr).select("field1, field2, field3, field4")
-    end 
-  end
 end
