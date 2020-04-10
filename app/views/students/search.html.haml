@@ -113,5 +113,14 @@
         %br/
         %input{:type => "submit", :value => "Search"}
         
-        
-        
+    %table#results.table
+      %thead
+        %tr
+          %th First Name
+          %th Last Name
+          %th Advisor
+          %th Class Year
+      %tbody
+        - @result.each do |student|
+          %tr
+            %td= student.firstName

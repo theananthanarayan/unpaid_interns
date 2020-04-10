@@ -34,16 +34,16 @@ class StudentsController < ApplicationController
   end
   
   def search
-    @pw = session[:password]
-    @em = session[:email]
-    if @pw == nil || @pw == "" || @em == nil || @em == ""
-      defaultInfo
-    else
-      @tempStudent = Student.where(password: @pw, email: @em)
-      @tempStudent = @tempStudent.take()
-      
-      @introMsg = @tempStudent.firstName + " " + @tempStudent.lastName
+    studentHash = params[:student]
+    @attributes = [:firstName, :lastName, :advisor, :classYear] 
+    query = {}
+    @attributes.each do |attribute|
+      if studentHash[attribute.to_s]!= ''
+        query[attribute]=studentHash["firstName"]
+      end
     end
+    
+    @result = Student.where(query).select(@attributes)
   end
   
   def defaultInfo
@@ -92,18 +92,7 @@ class StudentsController < ApplicationController
     @pw = session[:password]
     @em = session[:email]
   end 
-  
-  def searchBox
-    attributes = [:firstName, :lastName, :advisor, :classYear] 
-    query = {}  
-    attributes.each do |attribute|
-      if params[attribute]!= ''
-        query[attribute]=params[attribute]
-      end
-    end
-    
-    @result = Student.where(query).select(attributes)
-  end
+
 end 
     
     
