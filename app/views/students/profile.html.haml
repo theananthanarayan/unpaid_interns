@@ -98,7 +98,6 @@
         %h3 "#{@student.firstName} #{@student.lastName}"
         %h3= "Class of #{@student.classYear}"
         %img= image_tag @student.profilePic
-        %h3= @student.advisor
         - if @hasOwnership
           %h3= link_to "Edit Your Profile", edit_student_path(id: @student.id)
         - else
