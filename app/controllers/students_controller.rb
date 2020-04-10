@@ -42,18 +42,19 @@ class StudentsController < ApplicationController
   def search
     @attributes = [:firstName, :lastName, :advisor, :classYear] 
     studentHash = {}
-    query = {}
     
     unless params[:student].nil?
       studentHash = params[:student]
     end
   
-    @attributes.each do |attribute|
-      if studentHash[attribute.to_s]!= '' && studentHash[attribute.to_s]!=nil
-        query[attribute]=studentHash[attribute].downcase.capitalize
-      end
+    @query = studentHash.map{|k,v| [k.to_sym,v.downcase.capitalize]}
+                       .select{|k,v| @attributes.include?(k) and not v ==""}
+                       .to_h
+    unless @query == {}
+      @result = Student.where(@query).select(@attributes,:id)
+    else
+      @result = Student.where(:id=>"")
     end
-    @result = Student.where(query).select(@attributes,:id)
   end
   
   def defaultInfo
