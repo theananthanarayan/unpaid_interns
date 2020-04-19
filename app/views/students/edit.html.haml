@@ -115,4 +115,17 @@
   %br/
   %br/
   
+  = label :student, :research, 'Research'
+  = text_area :student, 'research', :columns => 80, as: :array
+  
+  %br/
+  
+  = label :student, :colleagues, 'Colleagues'
+  = text_area :student, 'colleagues', :columns => 80, as: :array
+  
+  %br/
+  
+  = label :student, :careers, 'Careers'
+  = text_area :student, 'careers', :columns => 80, as: :array
+  
   = submit_tag 'Update Your Info', :class => 'btn btn-primary'
