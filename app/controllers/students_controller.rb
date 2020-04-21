@@ -106,5 +106,6 @@ class StudentsController < ApplicationController
     @em = session[:email]
     @tempStudent = Student.where(password: @pw, email: @em)
     @tempStudent = @tempStudent.take()
+    @messages = Message.where()
   end 
 end

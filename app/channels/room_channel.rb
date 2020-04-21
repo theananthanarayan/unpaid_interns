@@ -1,9 +1,11 @@
 class RoomChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    if params[:room_id].present?
+    if params[:convo_id].present?
       # creates a private chat room with a unique name
-      stream_from("ChatRoom-#{(params[:room_id])}")
+      stream_from("ChatRoom-#{(params[:convo_id])}")
+    else
+      raise 'convo_id not found'
     end
   end
 
@@ -13,32 +15,34 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    sender    = get_sender(data)
-    room_id   = data['room_id']
-    message   = data['message']
+    sender_id    = data['sender_id']
+    convo_id   = data['convo_id']
+    content   = data['content']
 
-    raise 'No room_id!' if room_id.blank?
-    convo = get_convo(room_id) # A conversation is a room
+    raise 'No convo_id!' if convo_id.blank?
+    raise 'No sender_id' if sender_id.blank?
+    convo = get_convo(convo_id) # A conversation is a room
+    sender = get_sender(sender_id)
     raise 'No conversation found!' if convo.blank?
-    raise 'No message!' if message.blank?
+    raise 'No message!' if content.blank?
+    raise 'No sender found!!!NOOOAAH' if sender.blank?
 
     # adds the message sender to the conversation if not already included
-    convo.users << sender unless convo.users.include?(sender)
+    convo.students << sender unless convo.users.include?(sender)
     # saves the message and its data to the DB
     # Note: this does not broadcast to the clients yet!
-    Message.create!(
-      conversation: convo,
-      sender: sender,
-      content: message
+    Messages.create!(
+      conversation_id: convo.id,
+      student_id: sender.id,
+      content: content
     )
   end
-  
-  def get_convo(room_code)
-    Conversation.find_by(room_code: room_code)
+  def get_convo(id)
+    Conversation.find(id)
   end
   
-  def set_sender
-    User.find_by(guid: id)
+  def get_sender(id)
+    Student.find(id)
   end
   
 end

@@ -94,3 +94,16 @@
     %div{:style => "padding-left:16px;"}
       %h2 Messages coming soon!
       %h2= link_to "Go to Home", students_index_url
+
+
+  
+    %h1 Chat Room
+    #message  
+      - @messages.each do |message|
+        message.content
+    %form
+      %label Say something:
+      %br/
+      %input#room_speaker{type: "text"}/
+      
+  

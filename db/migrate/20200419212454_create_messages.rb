@@ -1,11 +1,11 @@
 class CreateMessages < ActiveRecord::Migration[5.0]
-  def up
+  def change
     create_table :messages do |t|
-      t.string :content
-      t.timestamps
+      t.text    'content'
+      t.references    'student'
+      t.references    'conversation'
     end
   end
-  
   def down
     drop_table :messages
   end

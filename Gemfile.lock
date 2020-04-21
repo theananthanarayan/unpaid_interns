@@ -230,6 +230,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actioncable (~> 5.0, >= 5.0.2)
   active_link_to
   byebug
   capybara
