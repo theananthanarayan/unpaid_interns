@@ -3,7 +3,18 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :javascript
+      var student_id = "#{@student_id}";
     :css
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f3f3f3;
+        color: black;
+        text-align: center;
+      }
       .center{
         display: block;
         margin-left: auto;
@@ -90,17 +101,16 @@
       %b=link_to "Search", students_search_url, style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url, style: 'color:#FFFFFF;text-decoration:none;'
       - if @pw != ""
-        %b=link_to "Profile", students_profile_url(id: @tempStudent.id), style: 'color:#FFFFFF;text-decoration:none;'
+        %b=link_to "Profile", students_profile_url(id: @student_id), style: 'color:#FFFFFF;text-decoration:none;'
 
 
 
   
     %h1 Chat Room
-    #message  
-      = render 'display_messages', :messages => @messages
-    %form
-      %label Say something:
-      %br/
-      %input#room_speaker{type: "text"}/
-      
-  
+    #message
+      = render @messages
+    .footer
+      %form
+        %label Say something:
+        %br/
+        %input{placeholder: "Start Typing!", type: "text"}/

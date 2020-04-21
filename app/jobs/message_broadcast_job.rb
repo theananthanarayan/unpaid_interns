@@ -11,10 +11,11 @@ class MessageBroadcastJob < ApplicationJob
       # This is also a new feature in Rails 5. The controller renderer has been 
       # extracted from the controller instance and can now be called as a class 
       # method
-      ApplicationController.renderer.render(partial: 'students/display_message', locals: { messages: message})
+      ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
     end
     
   def build_room_id(id)
-    "ChatRoom-#{id}"
+    #"ChatRoom-#{id}"
+    "room_channel"
   end
 end

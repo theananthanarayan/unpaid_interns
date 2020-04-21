@@ -104,13 +104,14 @@ class StudentsController < ApplicationController
   def message
     @pw = session[:password]
     @em = session[:email]
-    if params.has_key?(:id)
-      @convo_id = params[:id]
-    else
-       redirect_to students_message_url(id: 1)
+    unless session.has_key?(:id)
+      redirect_to students_index_url
     end
-    @tempStudent = Student.where(password: @pw, email: @em)
-    @tempStudent = @tempStudent.take()
-    @messages = Message.all()
+    @student_id = session[:id]
+    unless params.has_key?(:convo_id)
+       redirect_to students_message_url(convo_id: 1)
+    end
+    @convo_id = params[:convo_id]
+    @messages = Message.where(:conversation_id=>@convo_id).select(:content,:student_id).all()
   end 
 end
