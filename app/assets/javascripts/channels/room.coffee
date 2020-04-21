@@ -17,10 +17,11 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     @perform 'speak', message
     console.log("ENDING SEND")
 
+
 $(document).on 'keypress', '#room_speaker', (event) ->
   if event.keyCode is 13 # return = send
     # Call speak from the method defined above
-    App.room.speak { content: event.target.value,student_id: 1,conversation_id: 1 }
+    App.room.speak  { content: event.target.value,student_id: 1,conversation_id: 1 }
     # Set input to be empty after the message gets to the server
     event.target.value = ''
     # Prevent form from reloading

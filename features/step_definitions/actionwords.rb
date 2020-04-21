@@ -7,11 +7,13 @@ module Actionwords
   end
 
   def i_should_see_a_go_to_profile_link
-    has_link?('Go to Profile')
+    i_type_my_email_and_password
+    click_the_sign_in_button
+    has_link?("Profile")
   end
 
   def i_click_go_to_profile
-    click_link('Go to Profile')
+    click_link("Profile")
   end
 
   def i_should_be_on_the_profile_page_with_the_correct_p1(p1 = "")
@@ -30,7 +32,7 @@ module Actionwords
   end
 
   def click_the_sign_in_button
-    click_button "Sign in"
+    click_button "Sign In"
   end
 
   def i_should_be_signed_in
