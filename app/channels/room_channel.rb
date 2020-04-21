@@ -1,12 +1,7 @@
 class RoomChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    if params[:convo_id].present?
-      # creates a private chat room with a unique name
-      stream_from("ChatRoom-#{(params[:convo_id])}")
-    else
-      raise 'convo_id not found'
-    end
+    stream_from("ChatRoom-#{(params[:convo_id])}")
   end
 
   def unsubscribed
@@ -44,5 +39,4 @@ class RoomChannel < ApplicationCable::Channel
   def get_sender(id)
     Student.find(id)
   end
-  
 end

@@ -91,16 +91,13 @@
       %b=link_to "Messages", students_message_url, style: 'color:#FFFFFF;text-decoration:none;'
       - if @pw != ""
         %b=link_to "Profile", students_profile_url(id: @tempStudent.id), style: 'color:#FFFFFF;text-decoration:none;'
-    %div{:style => "padding-left:16px;"}
-      %h2 Messages coming soon!
-      %h2= link_to "Go to Home", students_index_url
+
 
 
   
     %h1 Chat Room
     #message  
-      - @messages.each do |message|
-        message.content
+      = render 'display_messages', :messages => @messages
     %form
       %label Say something:
       %br/
