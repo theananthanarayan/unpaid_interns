@@ -4,6 +4,113 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     :css
+      .splitDes{
+        position: absolute;
+        z-index: 1;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-top: 0px;
+      }
+      .Img1{
+        height:300px;
+        width: 40%;
+        position: absolute;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        left: 0%;
+      }
+
+      .Text1{
+        overflow-y: hidden;
+        height:300px;
+        color:white;
+        background-color: #500000;
+        width: 60%;
+        position: relative;
+        overflow-x: hidden;
+        left: 40%;
+      }
+
+      .Img2{
+        height:300px;
+        width: 40%;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        left: 60%
+      }
+
+      .Text2{
+        height:300px;
+        width: 60%;
+        position: absolute;
+        left: 0%;
+        background-color: #FFF;
+        overflow-x: hidden;
+        overflow-y: hidden;
+      }
+ 
+      .crop{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      imgChas{
+        clip: rect(0px,60px,200px,0px);
+      }
+
+      imgPaula{
+        clip: rect(0px,60px,200px,0px);
+      }
+
+      .split {
+        height: 175px;
+        width: 25%;
+        position: absolute;
+        z-index: 1;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-top: 0px;
+      }
+      
+      .left {
+        left: 0%;
+        background-color: #332C2C;
+      }
+      
+      .right {
+        left:25%;
+        background-color: #332C2C;
+      }
+
+      .right2{
+        left:50%;
+        background-color:#332C2C;
+      }
+
+      .right3{
+        left:75%;
+        background-color:#332C2C;
+      }
+      
+      .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color:white;
+      }
+      
+      #botBanner{
+      height: 120px;
+      bottom: 0px;
+      left: 0px;
+      background-color: #332C2C;
+      width: 100%;
+      }
+
       .center{
         display: block;
         margin-left: auto;
@@ -90,7 +197,7 @@
       %b=link_to "Search", students_search_url, style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url, style: 'color:#FFFFFF;text-decoration:none;'
       - if @introMsg != "Guest"
-        %b=link_to "Profile", students_profile_url(id: @ID), style: 'color:#FFFFFF;text-decoration:none;'
+        %b=link_to "Profile", students_profile_url, style: 'color:#FFFFFF;text-decoration:none;'
 
     %div{:style => "padding-left:0px"}
       - if @introMsg == "Guest"
@@ -115,11 +222,41 @@
         %b= link_to "Logout", students_logout_url
       
       %h3 Welcome, #{@introMsg}
-      %img{:alt => "cs landing", :src => "https://engineering.tamu.edu/cse/_files/_images/_content-images/tapia_2016.jpg", :class => "center"}/
+    
+    .splitDes.Img1
+      .crop.imgChas
+        %img{:alt => "Chaspari", :src => "https://i.ibb.co/grgkkpX/chaspari.jpg"}/
+    .splitDes.Text1
+      .centered
+        %h2 Students, faculty, and staff in CSE are continuing to work together to build an even stronger department.
 
-    %div{:style => "text-align:center;padding:30px;"}
-      %h4 Students, faculty, and staff in CSE are continuing to work together to build an even stronger department. 
-      %h4 The mission of the Department of Computer Science is to develop the human and intellectual resources needed to meet the future technological challenges in the field of computing. This includes developing computer scientists and computer engineers for positions of leadership in industry, government, and academia.
+    .splitDes.Text2
+      .centered
+        %h4{:style => "color:#500000;"} The mission of the Department of Computer Science is to develop the human and intellectual resources needed to meet the future technological challenges in the field of computing. This includes developing computer scientists and computer engineers for positions of leadership in industry, government, and academia.
+    .splitDes.Img2
+      .crop.imgPaula
+        %img{:alt => "Paula", :src => "https://i.ibb.co/PYqMJWN/grid-1.jpg"}/
+
+    .split.left
+      .centered
+        %p The Department of Computer Science and Engineering
+        %h5 College of Engineering
+    .split.right
+      .centered
+        %p Department of Computer Science & Engineering
+        %h5 301 Harvey R. Bright Building College Station, TX 77843-3112
+    .split.right2
+      .centered
+        %h5 Phone: 979-458-3870
+        %h5 Fax: 979-845-1420
+        %h5 cse-general@cse.tamu.edu
+    .split.right3
+      .centered
+        %h3 Faculty
+        %h3 Staff
+        %h6 by Unpaid Interns
+
+
     :javascript
       var coll = document.getElementsByClassName("collapsible");
       var i;
@@ -135,3 +272,4 @@
           } 
         });
       }
+
