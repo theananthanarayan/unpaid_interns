@@ -1,0 +1,6 @@
+%table#message.table
+  %tbody
+    - @messages.each do |message|
+      %tr
+        %td= message.student.firstName + " " + message.student.lastName
+        %td= message.content

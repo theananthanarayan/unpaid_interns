@@ -110,7 +110,14 @@ class StudentsController < ApplicationController
   def message
     @pw = session[:password]
     @em = session[:email]
-    @tempStudent = Student.where(password: @pw, email: @em)
-    @tempStudent = @tempStudent.take()
+    unless session.has_key?(:id)
+      redirect_to students_index_url    #Ideally should go to a login page
+    end
+    @student_id = session[:id]
+    @convo_id = params[:convo_id] || 1    #Ideally should go to a messaging homepage if no param set
+    #unless Conversation.exists?(@convo_id) and Conversation.find(@convo_id).student_ids.include? @student_id
+    #  redirect_to students_index_url    #Ideally should go to a messaging homepage if no param set
+    #end
+    @messages = Message.where(:conversation_id=>@convo_id).select(:content,:student_id).all()
   end 
 end

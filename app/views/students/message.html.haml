@@ -3,7 +3,50 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :javascript
+      convo_id ="#{@convo_id}";
+      student_id = "#{@student_id}"
+      App.room = App.cable.subscriptions.create({
+          channel: 'RoomChannel',
+          convo_id: convo_id
+        }, {
+          connected: function() {},
+          disconnected: function() {},
+          received: function(data) {
+            console.log("RECIEVED");
+            return $('#message').append(data['message']);
+          },
+          speak: function(message) {
+            console.log("STARTING SEND");
+            this.perform('speak', message);
+            return console.log("ENDING SEND");
+          }
+        });
+      
+        $(document).on('keypress', '#room_speaker', function(event) {
+          if (event.keyCode === 13) {
+            App.room.speak({
+              content: event.target.value,
+              student_id: student_id,
+              conversation_id: convo_id
+            });
+            event.target.value = '';
+            return event.preventDefault();
+          }
+        });
+      
+      
+      
     :css
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f3f3f3;
+        color: black;
+        text-align: center;
+      }
       .center{
         display: block;
         margin-left: auto;
@@ -90,7 +133,17 @@
       %b=link_to "Search", students_search_url, style: 'color:#FFFFFF;text-decoration:none;'
       %b=link_to "Messages", students_message_url, style: 'color:#FFFFFF;text-decoration:none;'
       - if @pw != ""
-        %b=link_to "Profile", students_profile_url(id: @tempStudent.id), style: 'color:#FFFFFF;text-decoration:none;'
-    %div{:style => "padding-left:16px;"}
-      %h2 Messages coming soon!
-      %h2= link_to "Go to Home", students_index_url
+        %b=link_to "Profile", students_profile_url(id: @student_id), style: 'color:#FFFFFF;text-decoration:none;'
+
+
+
+    
+    %h1 Chat Room
+    #message
+      = render @messages
+    .footer
+      %form
+        %label Say something:
+        %br/
+        %input#room_speaker{placeholder: "Start Typing!", type: "text"}/
+        

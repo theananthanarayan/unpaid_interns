@@ -5,7 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+#action cable 
+gem 'actioncable', '~> 5.0', '>= 5.0.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.7', '>= 5.0.7.2'
 # Use Puma as the app server
@@ -20,6 +21,8 @@ gem 'haml', '~> 3.1.4'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'simple_form'
+
+gem 'gon', '~> 6.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -55,7 +58,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'sqlite3', '~> 1.3.13'
   gem 'pg', '~> 0.21'
 end
 
