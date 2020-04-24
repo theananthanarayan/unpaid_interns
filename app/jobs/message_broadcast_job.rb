@@ -15,7 +15,6 @@ class MessageBroadcastJob < ApplicationJob
     end
     
   def build_room_id(id)
-    #"ChatRoom-#{id}"
-    "room_channel"
+    "room_channel-#{id}"
   end
 end

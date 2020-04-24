@@ -4,7 +4,39 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     :javascript
-      var student_id = "#{@student_id}";
+      convo_id ="#{@convo_id}";
+      student_id = "#{@student_id}"
+      App.room = App.cable.subscriptions.create({
+          channel: 'RoomChannel',
+          convo_id: convo_id
+        }, {
+          connected: function() {},
+          disconnected: function() {},
+          received: function(data) {
+            console.log("RECIEVED");
+            return $('#message').append(data['message']);
+          },
+          speak: function(message) {
+            console.log("STARTING SEND");
+            this.perform('speak', message);
+            return console.log("ENDING SEND");
+          }
+        });
+      
+        $(document).on('keypress', '#room_speaker', function(event) {
+          if (event.keyCode === 13) {
+            App.room.speak({
+              content: event.target.value,
+              student_id: student_id,
+              conversation_id: convo_id
+            });
+            event.target.value = '';
+            return event.preventDefault();
+          }
+        });
+      
+      
+      
     :css
       .footer {
         position: fixed;
@@ -105,7 +137,7 @@
 
 
 
-  
+    
     %h1 Chat Room
     #message
       = render @messages
@@ -114,3 +146,4 @@
         %label Say something:
         %br/
         %input#room_speaker{placeholder: "Start Typing!", type: "text"}/
+        

@@ -105,13 +105,13 @@ class StudentsController < ApplicationController
     @pw = session[:password]
     @em = session[:email]
     unless session.has_key?(:id)
-      redirect_to students_index_url
+      redirect_to students_index_url    #Ideally should go to a login page
     end
     @student_id = session[:id]
-    unless params.has_key?(:convo_id)
-       redirect_to students_message_url(convo_id: 1)
-    end
-    @convo_id = params[:convo_id]
+    @convo_id = params[:convo_id] || 1    #Ideally should go to a messaging homepage if no param set
+    #unless Conversation.exists?(@convo_id) and Conversation.find(@convo_id).student_ids.include? @student_id
+    #  redirect_to students_index_url    #Ideally should go to a messaging homepage if no param set
+    #end
     @messages = Message.where(:conversation_id=>@convo_id).select(:content,:student_id).all()
   end 
 end
