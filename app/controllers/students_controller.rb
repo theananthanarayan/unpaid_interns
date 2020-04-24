@@ -30,7 +30,9 @@ class StudentsController < ApplicationController
     em = session[:email]
     user = Student.where(password: pw, email: em).select(:id)
     user = user.take()
-    session[:id]=user.id
+    if(user != nil)
+      session[:id]=user.id
+    end
     redirect_to students_index_url
   end
   
