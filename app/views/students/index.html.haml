@@ -4,6 +4,15 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     :css
+      a:hover, a:active {
+        color: #FCE300;
+        text-decoration: bold;
+      }
+      a {
+        color: white;
+        background-color: transparent;
+        text-decoration: none;
+      }
       .splitDes{
         position: absolute;
         z-index: 1;
@@ -239,12 +248,16 @@
 
     .split.left
       .centered
-        %p The Department of Computer Science and Engineering
-        %h5 College of Engineering
+        %p 
+          %a{:href => "https://engineering.tamu.edu/cse/index.html"} The Department of Computer Science and Engineering
+        %h5 
+          %a{:href => "https://engineering.tamu.edu/"} College of Engineering
     .split.right
       .centered
-        %p Department of Computer Science & Engineering
-        %h5 301 Harvey R. Bright Building College Station, TX 77843-3112
+        %p 
+          %a{:href => "https://engineering.tamu.edu/cse/index.html"} Department of Computer Science & Engineering
+        %h5 
+          %a{:href => "https://www.google.com/maps/dir//301+Harvey+R.+Bright+Building+College+Station,+TX+77843-3112/@30.6190341,-96.3738075,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x86468396cc4eaaf3:0xff0cb9f3dca1a1aa!2m2!1d-96.338788!2d30.6190388"} 301 Harvey R. Bright Building College Station, TX 77843-3112
     .split.right2
       .centered
         %h5 Phone: 979-458-3870
@@ -252,9 +265,12 @@
         %h5 cse-general@cse.tamu.edu
     .split.right3
       .centered
-        %h3 Faculty
-        %h3 Staff
-        %h6 by Unpaid Interns
+        %h3 
+          %a{:href => "https://engineering.tamu.edu/cse/profiles/index.html"} Faculty
+        %h3
+          %a{:href => "https://engineering.tamu.edu/cse/profiles/staff.html"} Staff
+        %h6 
+          %a{:href => "https://github.com/theananthanarayan/unpaid_interns/"} Unpaid Interns
 
 
     :javascript
@@ -272,4 +288,5 @@
           } 
         });
       }
+
 
