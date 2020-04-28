@@ -220,7 +220,7 @@
             = password_field_tag :password
             =submit_tag 'Sign In'
           %br/
-          = link_to "Or Sign Up", new_student_path
+          = link_to "Or Sign Up", new_student_path, style: 'color:#454545;'
           %br/
           %div{:style => "padding-left:16px"}
             - flash.each do |key, value|
